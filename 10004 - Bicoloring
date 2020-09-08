@@ -1,7 +1,5 @@
-# UVa Online Judge
-# Código C++
-
-# Grafo
+// UVa Online Judge
+// Código C++
 
 #include <iostream>
 #include <vector>
