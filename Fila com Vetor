@@ -117,10 +117,10 @@ int main()
 	fila.remover();
 	cout<<fila.acessar()<<'\n'; // imprime 40
 	fila.remover();
-  cout<<fila.getTamanho()<<'\n'; // imprime qtd de elementos na fila.
+  	cout<<fila.getTamanho()<<'\n'; // imprime qtd de elementos na fila.
 	cout<<fila.acessar()<<'\n'; // imprime 20
-  fila.remover();
-  cout<<fila.acessar()<<'\n'; // Fila vazia
+ 	fila.remover();
+  	cout<<fila.acessar()<<'\n'; // Fila vazia
 	fila.inserir(87);
 	cout<<fila.acessar()<<'\n'; // imprime 87
 	fila.remover();
