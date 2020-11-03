@@ -1,0 +1,46 @@
+//Algoritmos - teoria e praticas 3edt - Thomas Cormen
+//Programação Dinâmica
+//Problema de Divisão de Hastes (Programação Dinâmica Botton Up)
+
+#include <iostream>
+using namespace std;
+
+int BottomUpCutRod(int p[],int n)
+{
+    int r[n+1];
+    int q;
+
+    r[0]=0;
+
+    for(int j=1; j<=n; j++)
+    {
+        q=INT_MIN;
+        for(int i=0; i<j; i++)
+        {
+            q=max(q,p[i]+r[j-i-1]);
+        }
+        r[j]=q;
+    }
+    return r[n];
+}
+
+int main()
+{
+    int n;
+
+    cout<<"Digite o tamanho da haste: ";
+
+    cin>>n;
+    int arr[n];
+
+    cout<<"Digite os valores: ";
+
+    for(int i=0; i<n; i++)
+    {
+        cin>>arr[i];
+    }
+
+    cout<<"O valor maximo: "<<BottomUpCutRod(arr, n)<<'\n';
+
+    return 0;
+}
