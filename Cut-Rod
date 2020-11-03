@@ -1,3 +1,5 @@
+//Algoritmos - teoria e praticas 3edt - Thomas Cormen
+//Programação Dinâmica
 //Problema de Corte de Hastes (Dividir para Conquistar)
 
 #include <iostream>
