@@ -1,0 +1,129 @@
+//Implementação: Fila com Vetor
+
+#include <iostream>
+
+using namespace std;
+
+class Fila
+{
+private:
+    int tam;
+    int* array;
+    int inicio;
+    int fim;
+    int qtd;
+
+public:
+    Fila();
+    Fila(int tam);
+    ~Fila(){if(array) delete [] array;}
+
+    void inserir(int x);
+    int remover();
+    int acessar()const;
+    bool vazio()const{return (!qtd);}
+    bool cheio()const{return (tam==qtd);}
+    int getTamanho()const {return qtd;}
+};
+
+Fila::Fila():
+    tam(0),
+    array(0),
+    inicio(-1),
+    fim(-1),
+    qtd(0)
+{}
+
+Fila::Fila(int tam):
+    tam(0),
+    array(0),
+    inicio(-1),
+    fim(-1),
+    qtd(0)
+{
+    array = new int[tam];
+    this->tam=tam;
+}
+
+void Fila::inserir(int x)
+{
+    if(vazio())
+        inicio=0;
+
+    if(!cheio())
+    {
+        fim++;
+        qtd++;
+
+        if(fim==tam)
+        {
+            fim=0;
+        }
+
+        array[fim] = x;
+    }
+}
+
+int Fila::remover()
+{
+    if(!vazio())
+    {
+        if(inicio==fim)
+        {
+            int aux=array[inicio];
+            inicio=fim=-1;
+            qtd=0;
+            return aux;
+        }
+
+        inicio++;
+
+        if(inicio==tam)
+            inicio=0;
+
+        qtd--;
+
+        return array[inicio-1];
+    }
+}
+
+int Fila::acessar()const
+{
+    if(!vazio())
+    {
+        return array[inicio];
+    }
+}
+
+int main()
+{
+	Fila fila(100);
+
+	fila.inserir(4);
+	fila.inserir(10);
+	fila.inserir(7);
+	fila.inserir(12);
+
+	cout<<fila.acessar()<<'\n'; // imprime 4    4  10 7  7 12 40 1 20 87
+	fila.inserir(40);
+	fila.remover();
+	cout<<fila.acessar()<<'\n'; // imprime 10
+	fila.remover();
+	cout<<fila.acessar()<<'\n'; // imprime 7
+	fila.inserir(20);
+	cout<<fila.acessar()<<'\n'; // imprime 7
+	fila.remover();
+	cout<<fila.acessar()<<'\n'; // imprime 12
+	fila.remover();
+	cout<<fila.acessar()<<'\n'; // imprime 40
+	fila.remover();
+  cout<<fila.getTamanho()<<'\n'; // imprime qtd de elementos na fila.
+	cout<<fila.acessar()<<'\n'; // imprime 20
+  fila.remover();
+  cout<<fila.acessar()<<'\n'; // Fila vazia
+	fila.inserir(87);
+	cout<<fila.acessar()<<'\n'; // imprime 87
+	fila.remover();
+
+	return 0;
+}
