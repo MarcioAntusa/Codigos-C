@@ -97,7 +97,7 @@ int Fila::acessar()const
 
 int main()
 {
-	Fila fila(100);
+	Fila fila(10);
 
 	fila.inserir(4);
 	fila.inserir(10);
