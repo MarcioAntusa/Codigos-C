@@ -1,0 +1,114 @@
+//Problema: Dada uma sequência de matrizes, encontre a maneira mais eficiente de multiplicar essas matrizes. 
+//O problema não é realmente fazer as multiplicações, mas simplesmente decidir em que ordem fazer as multiplicações.
+
+//V.1 - Tabulação
+//V.2 - Programação Dinânima
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+//V.1 - Tabulação
+
+void PrintOptimalParens(int i, int j, int n, int *s, char &name) //Imprime a configuração ideais dos parênteses. 
+{
+    if (i == j)
+    {
+        cout<<(char)(64+i); //Usando tabela ascii, converte o numero para caracter. Ex: 64+1 = A
+        return;
+        //or
+        //cout << name++;
+        //return;
+        //or
+        //printf("%c", i+64);
+        //return;
+    }
+
+    cout << "(";
+    PrintOptimalParens(i, *((s+i*n)+j), n, s, name);
+    PrintOptimalParens(*((s+i*n)+j) + 1, j, n, s, name);
+    cout << ")";
+}
+
+int MatrixChainOrder(int p[], int n)
+{
+    int m[n][n], s[n][n];
+    int j,q;
+
+    for (int i = 1; i < n; i++)
+        m[i][i] = 0;
+
+    for (int L = 2; L < n; L++)
+    {
+        for (int i = 1; i < n - L + 1; i++)
+        {
+            j = i + L - 1;
+            m[i][j] = INT_MAX;
+            for (int k = i; k <= j - 1; k++)
+            {
+                q = m[i][k] + m[k + 1][j]+ (p[i - 1]) * (p[k]) * (p[j]);
+
+                if (q < m[i][j])
+                {
+                    m[i][j] = q;
+                    s[i][j] = k;
+                }
+            }
+        }
+    }
+
+    char name = 'A';
+    cout << "Parentese ideal: ";
+    PrintOptimalParens(1, n-1, n, (int *)s, name);
+    cout<<"\nCusto minimo de multiplicacao: "<<m[1][n-1]<<'\n';
+}
+
+//V.2 - Programação Dinânima
+/*
+int dp[100][100];   // Vetor que guarda resultado
+
+int LookupChain(int* p, int i, int j)
+{
+    if(i==j)
+    {
+        return 0;
+    }
+
+    if(dp[i][j]<INT_MAX)
+    {
+        return dp[i][j];
+    }
+        int q=0;
+        for(int k=i; k<j; k++)
+        {
+            q=LookupChain(p,i,k)+LookupChain(p,k+1,j)+p[i-1]*p[k]*p[j];
+
+            if(q<dp[i][j])
+            {
+                dp[i][j]=q;
+            }
+        }
+
+    return dp[i][j];
+}
+
+int MemoizedMatrixChain(int* p, int n)
+{
+
+    for(int i=0; i<n; i++)
+    {
+        for(int j=i; j<n; j++)
+        {
+            dp[i][j]=INT_MAX;
+        }
+    }
+
+    return LookupChain(p, 1, n-1);
+}
+*/
+int main()
+{
+    int arr[] = { 1, 2, 3, 4 };
+
+    MatrixChainOrder(arr, 4)<<'\n';
+}
