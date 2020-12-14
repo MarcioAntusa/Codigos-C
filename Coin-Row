@@ -3,7 +3,6 @@
 
 //Programação Dinâmica - Algoritmo Guloso
 
-
 #include <iostream>
 
 using namespace std;
