@@ -109,7 +109,6 @@ void Arvore::printOrder(No* no)const
     }
 }
 
-
 int main()
 {
 	Arvore arv;
